@@ -1,11 +1,10 @@
 package ich.dekit.progresspulse;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
-@RequestMapping
 public class TestController {
     private final TestRepository testRepository;
 
@@ -13,13 +12,19 @@ public class TestController {
         this.testRepository = testRepository;
     }
 
-    @GetMapping("/showTablePage")
-    public ResponseEntity getAllProduct () {
-        return ResponseEntity.ok(testRepository.findAll());
-    }
     @GetMapping("/sayHiPage")
     public String sayHi () {
         return "Hi!";
+    }
+
+    @GetMapping("/testPostRequest")
+    public ResponseEntity<List<User>> getAllProduct () {
+        return ResponseEntity.ok(this.testRepository.findAll());
+    }
+
+    @PostMapping("/testPostRequest")
+    public ResponseEntity<User> createProduct(@RequestBody User test) {
+        return ResponseEntity.status(201).body(this.testRepository.save(test));
     }
 
 }

@@ -1,8 +1,6 @@
 package ich.dekit.progresspulse;
 
-import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.stereotype.Repository;
+import org.springframework.data.mongodb.repository.MongoRepository;
 
-@Repository
-public interface TestRepository extends JpaRepository<Test, Long> {
+public interface TestRepository extends MongoRepository<User, String> {
 }
